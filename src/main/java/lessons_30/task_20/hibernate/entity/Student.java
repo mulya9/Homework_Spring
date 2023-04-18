@@ -16,6 +16,7 @@ public class Student {
     private String email;
 
     public Student() {
+
     }
 
     public Student(String name, String email) {
