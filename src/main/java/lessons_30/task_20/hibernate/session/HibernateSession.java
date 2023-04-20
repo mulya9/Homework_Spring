@@ -1,6 +1,6 @@
 package lessons_30.task_20.hibernate.session;
 
-import com.org.entity.User;
+
 import lessons_30.task_20.hibernate.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,7 +20,7 @@ import java.util.Properties;
 @PropertySource("application.properties")
 public class HibernateSession {
 
-    private static SessionFactory sessionFactory;
+
     @Value("${db.url}")
     private String URL;
 
@@ -37,15 +37,15 @@ public class HibernateSession {
         try {
             org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
             Properties properties = new Properties();
-            properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+            properties.put(Environment.DRIVER, "org.postgresql.Driver");
             properties.put(Environment.URL, URL);
             properties.put(Environment.USER, USERNAME);
             properties.put(Environment.PASS, PASSWORD);
-            properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+            properties.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
             properties.put(Environment.SHOW_SQL, "true");
             properties.put(Environment.HBM2DDL_AUTO, "update");
             configuration.setProperties(properties);
-            configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Student.class);
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
